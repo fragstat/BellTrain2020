@@ -46,13 +46,15 @@ CREATE TABLE IF NOT EXISTS Document (
 );
 
 CREATE TABLE IF NOT EXISTS Documents (
-    code INTEGER COMMENT 'Код документа' PRIMARY KEY,
+    id INTEGER PRIMARY KEY COMMENT 'Уникальный идентификатор',
+    code INTEGER UNIQUE COMMENT 'Код документа',
     doc_name VARCHAR(100) COMMENT 'Название документа'
 );
 COMMENT ON TABLE Document IS 'Документы';
 
 CREATE TABLE IF NOT EXISTS Country (
-    code INTEGER COMMENT 'Код страны' PRIMARY KEY,
+    id INTEGER PRIMARY KEY COMMENT 'Уникальный идентификатор',
+    code INTEGER UNIQUE COMMENT 'Код страны',
     country_name VARCHAR(100) COMMENT 'Название страны'
 );
 COMMENT ON TABLE Country IS 'Страны';
