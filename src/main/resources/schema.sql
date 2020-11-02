@@ -72,7 +72,7 @@ CREATE INDEX IX_Worker_Office_Id ON Worker (office_id);
 ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
 CREATE INDEX IX_Worker_Citizenship_Code ON Worker (citizenship_code);
-ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(code);
+ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(id);
 
 CREATE INDEX UX_Document_Id ON Document (id);
 
@@ -80,11 +80,11 @@ CREATE INDEX IX_Document_User_Id ON Document (user_id);
 ALTER TABLE Document ADD FOREIGN KEY (user_id) REFERENCES Worker(id);
 
 CREATE INDEX IX_Document_Doc_Code ON  Document (doc_code);
-ALTER TABLE Document ADD FOREIGN KEY (doc_code) REFERENCES Documents(code);
+ALTER TABLE Document ADD FOREIGN KEY (doc_code) REFERENCES Documents(id);
 
-CREATE INDEX UX_Documents_Code ON Documents (code);
+CREATE INDEX UX_Documents_Code ON Documents (id);
 
-CREATE INDEX UX_Country_Code ON Country (code);
+CREATE INDEX UX_Country_Code ON Country (id);
 
 CREATE INDEX UX_Organisation_Name ON Organisation (org_name);
 
