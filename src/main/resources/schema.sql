@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS Worker (
 );
 COMMENT ON TABLE Worker IS 'Пользователь';
 
-CREATE TABLE IF NOT EXISTS Document (
+CREATE TABLE IF NOT EXISTS User_Document (
     id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version INTEGER NOT NULL COMMENT 'Служебное поле hibernate',
     user_id INTEGER UNIQUE NOT NULL COMMENT 'Пользователь, кому принадлежит документ',
@@ -44,13 +44,14 @@ CREATE TABLE IF NOT EXISTS Document (
     doc_number VARCHAR(20) COMMENT 'Номер документа',
     doc_date DATE COMMENT 'Дата выдачи документа'
 );
+COMMENT ON TABLE User_Document IS 'Документ';
 
-CREATE TABLE IF NOT EXISTS Documents (
+CREATE TABLE IF NOT EXISTS Document_Type (
     id INTEGER PRIMARY KEY COMMENT 'Уникальный идентификатор',
     code INTEGER UNIQUE COMMENT 'Код документа',
     doc_name VARCHAR(100) COMMENT 'Название документа'
 );
-COMMENT ON TABLE Document IS 'Документы';
+COMMENT ON TABLE Document_Type IS 'Типы документов';
 
 CREATE TABLE IF NOT EXISTS Country (
     id INTEGER PRIMARY KEY COMMENT 'Уникальный идентификатор',
@@ -74,15 +75,15 @@ ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 CREATE INDEX IX_Worker_Citizenship_Code ON Worker (citizenship_code);
 ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(id);
 
-CREATE INDEX UX_Document_Id ON Document (id);
+CREATE INDEX UX_User_Document_Id ON User_Document (id);
 
-CREATE INDEX IX_Document_User_Id ON Document (user_id);
-ALTER TABLE Document ADD FOREIGN KEY (user_id) REFERENCES Worker(id);
+CREATE INDEX IX_User_Document_User_Id ON User_Document (user_id);
+ALTER TABLE User_Document ADD FOREIGN KEY (user_id) REFERENCES Worker(id);
 
-CREATE INDEX IX_Document_Doc_Code ON  Document (doc_code);
-ALTER TABLE Document ADD FOREIGN KEY (doc_code) REFERENCES Documents(id);
+CREATE INDEX IX_Document_Type_Id ON  Document_Type (id);
+ALTER TABLE Document_Type ADD FOREIGN KEY (id) REFERENCES User_Document(doc_code);
 
-CREATE INDEX UX_Documents_Code ON Documents (id);
+CREATE INDEX UX_Documents_Code ON Document_Type (id);
 
 CREATE INDEX UX_Country_Code ON Country (id);
 
