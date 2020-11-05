@@ -1,0 +1,76 @@
+package org.train.trainProject.dao.organisation;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.train.trainProject.model.Organisation;
+import org.train.trainProject.view.organisation.OrganisationListInView;
+
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Repository
+public class OrganisationDaoImpl implements OrganisationDao {
+
+    private final EntityManager em;
+
+    @Autowired
+    public OrganisationDaoImpl(EntityManager em) {
+        this.em = em;
+    }
+
+    @Override
+    public List<Organisation> list(OrganisationListInView inView) {
+        CriteriaQuery<Organisation> criteria = builder(inView.name, inView.inn, inView.isActive);
+        TypedQuery<Organisation> query = em.createQuery(criteria);
+        return query.getResultList();
+    }
+
+    @Override
+    public Organisation loadById(Long id) {
+        return em.find(Organisation.class, id);
+    }
+
+    @Override
+    public void update(Organisation organisation) {
+        em.persist(organisation);
+    }
+
+    @Override
+    public void save(Organisation organisation) {
+        em.persist(organisation);
+    }
+
+    private CriteriaQuery<Organisation> builder(String name, String inn, Boolean isActive) {
+        CriteriaBuilder qb = em.getCriteriaBuilder();
+        CriteriaQuery<Organisation> cq = qb.createQuery(Organisation.class);
+        Root<Organisation> organisation = cq.from(Organisation.class);
+
+        List<Predicate> predicates = new ArrayList<Predicate>();
+
+        if (name != null) {
+            predicates.add(
+                    qb.equal(organisation.get("org_name"), name));
+        }
+        if (inn != null) {
+            predicates.add(
+                    qb.equal(organisation.get("inn"), inn));
+        }
+        if (isActive != null) {
+            predicates.add(
+                    qb.equal(organisation.get("is_active"), isActive));
+        }
+        //query itself
+        cq.select(organisation)
+                .where(predicates.toArray(new Predicate[]{}));
+        //execute query and do something with result
+        return cq;
+    }
+}
