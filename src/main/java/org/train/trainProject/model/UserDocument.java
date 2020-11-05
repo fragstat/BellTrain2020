@@ -29,7 +29,7 @@ public class UserDocument {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Worker user;
 
-    @OneToMany
-    @Column(name = "doc_code")
+    @ManyToOne
+    @JoinColumn(name = "doc_code")
     private DocumentType docCode;
 }

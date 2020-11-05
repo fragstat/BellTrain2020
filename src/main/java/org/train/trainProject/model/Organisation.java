@@ -33,13 +33,14 @@ public class Organisation {
     @Column(name = "address", length = 75, nullable = false)
     private String address;
 
-    @Column(name = "phone", length = 11, nullable = false)
+    @Column(name = "phone", length = 11)
     private String phone;
 
     @Column(name = "is_active", nullable = false)
-    private boolean isActive;
+    private Boolean isActive;
 
-    public Organisation(String orgName, String fullName, String inn, String kpp, String address, String phone, boolean isActive) {
+    public Organisation(String orgName, String fullName, String inn, String kpp, String address, String phone,
+                        Boolean isActive) {
         this.orgName = orgName;
         this.fullName = fullName;
         this.inn = inn;
@@ -50,7 +51,7 @@ public class Organisation {
     }
 
     public Organisation(Long id, String orgName, String fullName, String inn, String kpp, String address, String phone,
-                        boolean isActive) {
+                        Boolean isActive) {
         this.id = id;
         this.orgName = orgName;
         this.fullName = fullName;

@@ -28,7 +28,7 @@ public class Office {
     @Column(name = "is_active")
     private boolean isActive;
 
-    @Column(name = "org_id")
+    @JoinColumn(name = "org_id")
     @ManyToOne
     private Organisation orgId;
 }

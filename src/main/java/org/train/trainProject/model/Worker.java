@@ -34,14 +34,15 @@ public class Worker {
     @Column(name = "is_identified")
     private boolean isIdentified;
 
-    @OneToOne(mappedBy = "Worker")
+    @OneToOne
+    @JoinColumn(name = "document")
     private UserDocument document;
 
-    @ManyToOne
-    @Column(name = "citizenship_code")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "citizenship_code")
     private Country citizenshipCode;
 
-    @Column(name = "office_id", nullable = false)
+    @JoinColumn(name = "office_id", nullable = false)
     @ManyToOne
     private Office officeId;
 }

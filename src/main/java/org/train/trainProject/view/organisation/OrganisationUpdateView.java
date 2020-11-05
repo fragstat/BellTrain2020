@@ -18,7 +18,7 @@ public class OrganisationUpdateView {
     @Size(max = 50)
     @NotEmpty(message = "orgName cannot be null")
     @ApiModelProperty(value = "Название", example = "Сбербанк")
-    public String orgName;
+    public String name;
 
     @Size(max = 150)
     @NotEmpty(message = "fullName cannot be null")

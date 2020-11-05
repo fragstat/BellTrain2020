@@ -57,7 +57,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
 
         if (name != null) {
             predicates.add(
-                    qb.equal(organisation.get("org_name"), name));
+                    qb.equal(organisation.get("orgName"), name));
         }
         if (inn != null) {
             predicates.add(
@@ -65,7 +65,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
         }
         if (isActive != null) {
             predicates.add(
-                    qb.equal(organisation.get("is_active"), isActive));
+                    qb.equal(organisation.get("isActive"), isActive));
         }
         //query itself
         cq.select(organisation)
