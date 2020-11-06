@@ -35,11 +35,18 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Transactional
     public void update(@Valid OrganisationUpdateView updateView) {
         Organisation organisation = new Organisation(updateView.id, updateView.name, updateView.fullName,
-                updateView.inn, updateView.kpp, updateView.address, updateView.phone, updateView.isActive);
+                updateView.inn, updateView.kpp, updateView.address);
+        if (updateView.phone != null) {
+            organisation.setPhone(updateView.phone);
+        }
+        if (updateView.isActive != null) {
+            organisation.setIsActive(updateView.isActive);
+        }
         dao.update(organisation);
     }
 
     @Override
+    @Transactional
     public List<OrganisationListOutView> list(@Valid OrganisationListInView organizationView) {
         List<Organisation> filter = dao.list(organizationView);
         return mapperFacade.mapAsList(filter, OrganisationListOutView.class);

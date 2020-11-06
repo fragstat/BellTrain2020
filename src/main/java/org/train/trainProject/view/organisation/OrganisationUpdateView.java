@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class OrganisationUpdateView {
 
     @ApiModelProperty(value = "Уникальный идентификатор", example = "1")
-    @NotEmpty(message = "id cannot be null")
+    @Size(min = 1,message = "id cannot be null")
     public Long id;
 
     @Size(max = 50)

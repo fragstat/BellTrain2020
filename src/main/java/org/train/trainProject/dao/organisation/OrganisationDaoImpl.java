@@ -12,9 +12,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
@@ -53,12 +51,9 @@ public class OrganisationDaoImpl implements OrganisationDao {
         CriteriaQuery<Organisation> cq = qb.createQuery(Organisation.class);
         Root<Organisation> organisation = cq.from(Organisation.class);
 
-        List<Predicate> predicates = new ArrayList<Predicate>();
+        List<Predicate> predicates = new ArrayList<>();
 
-        if (name != null) {
-            predicates.add(
-                    qb.equal(organisation.get("orgName"), name));
-        }
+        predicates.add(qb.equal(organisation.get("orgName"), name));
         if (inn != null) {
             predicates.add(
                     qb.equal(organisation.get("inn"), inn));

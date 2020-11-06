@@ -50,15 +50,12 @@ public class Organisation {
         this.isActive = isActive;
     }
 
-    public Organisation(Long id, String orgName, String fullName, String inn, String kpp, String address, String phone,
-                        Boolean isActive) {
+    public Organisation(Long id, String orgName, String fullName, String inn, String kpp, String address) {
         this.id = id;
         this.orgName = orgName;
         this.fullName = fullName;
         this.inn = inn;
         this.kpp = kpp;
         this.address = address;
-        this.phone = phone;
-        this.isActive = isActive;
     }
 }

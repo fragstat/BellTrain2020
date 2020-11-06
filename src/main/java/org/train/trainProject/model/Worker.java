@@ -1,12 +1,14 @@
 package org.train.trainProject.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Data
 @Entity(name = "Worker")
+@NoArgsConstructor
 public class Worker {
 
     @Id
@@ -32,9 +34,9 @@ public class Worker {
     private String phone;
 
     @Column(name = "is_identified")
-    private boolean isIdentified;
+    private Boolean isIdentified;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "document")
     private UserDocument document;
 
@@ -45,4 +47,17 @@ public class Worker {
     @JoinColumn(name = "office_id", nullable = false)
     @ManyToOne
     private Office officeId;
+
+
+    public Worker(String firstName, String secondName, String middleName, String position, String phone,
+                  Boolean isIdentified, Office office) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.middleName = middleName;
+        this.position = position;
+        this.phone = phone;
+        this.isIdentified = isIdentified;
+        this.officeId = office;
+    }
+
 }
