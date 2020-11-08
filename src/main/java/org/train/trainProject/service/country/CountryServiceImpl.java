@@ -11,6 +11,9 @@ import org.train.trainProject.view.country.CountryView;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * {@link CountryService}
+ */
 @Service
 public class CountryServiceImpl implements CountryService {
     private final CountryDao countryDao;
@@ -22,6 +25,9 @@ public class CountryServiceImpl implements CountryService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@link CountryService#save}
+     */
     @Transactional
     @Override
     public void save(@Valid CountryView countryView) {
@@ -29,6 +35,9 @@ public class CountryServiceImpl implements CountryService {
         countryDao.save(country);
     }
 
+    /**
+     * {@link CountryService#getById}
+     */
     @Transactional
     @Override
     public CountryView getById(Long id) {
@@ -36,6 +45,9 @@ public class CountryServiceImpl implements CountryService {
         return mapperFacade.map(country, CountryView.class);
     }
 
+    /**
+     * {@link CountryService#getByCode}
+     */
     @Transactional
     @Override
     public CountryView getByCode(Integer code) {
@@ -43,6 +55,9 @@ public class CountryServiceImpl implements CountryService {
         return mapperFacade.map(country, CountryView.class);
     }
 
+    /**
+     * {@link CountryService#getAll}
+     */
     @Transactional
     @Override
     public List<CountryView> getAll() {

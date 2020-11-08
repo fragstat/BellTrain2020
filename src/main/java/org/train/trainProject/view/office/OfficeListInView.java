@@ -19,6 +19,7 @@ public class OfficeListInView {
     @ApiModelProperty(value = "Название", example = "Сбербанк")
     public String name;
 
+    @Size(max =11, min = 11)
     @ApiModelProperty(value = "Номер телефона", example = "78005575525")
     public String phone;
 

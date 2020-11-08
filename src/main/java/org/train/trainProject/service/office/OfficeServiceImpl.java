@@ -12,6 +12,9 @@ import org.train.trainProject.view.office.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * {@link OfficeService}
+ */
 @Service
 public class OfficeServiceImpl implements OfficeService {
     private final OfficeDao officeDao;
@@ -25,6 +28,9 @@ public class OfficeServiceImpl implements OfficeService {
         this.mapperFacade = mapperFacade;
     }
 
+    /**
+     * {@link OfficeService#save}
+     */
     @Override
     @Transactional
     public void save(@Valid OfficeSaveView saveView) {
@@ -33,6 +39,9 @@ public class OfficeServiceImpl implements OfficeService {
         officeDao.save(office);
     }
 
+    /**
+     * {@link OfficeService#update}
+     */
     @Override
     @Transactional
     public void update(@Valid OfficeUpdateView updateView) {
@@ -46,6 +55,9 @@ public class OfficeServiceImpl implements OfficeService {
         officeDao.update(office);
     }
 
+    /**
+     * {@link OfficeService#list}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<OfficeListOutView> list(@Valid OfficeListInView organizationView) {
@@ -53,6 +65,9 @@ public class OfficeServiceImpl implements OfficeService {
         return mapperFacade.mapAsList(all, OfficeListOutView.class);
     }
 
+    /**
+     * {@link OfficeService#getById}
+     */
     @Override
     @Transactional(readOnly = true)
     public OfficeGetView getById(Long id) {

@@ -17,10 +17,13 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * {@link WorkerService}
+ */
 @Service
 public class WorkerServiceImpl implements WorkerService {
 
-    private final DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+    private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private final UserDocumentDao userDocumentDao;
     private final WorkerDao workerDao;
@@ -39,6 +42,9 @@ public class WorkerServiceImpl implements WorkerService {
         this.countryDao = countryDao;
     }
 
+    /**
+     * {@link WorkerService#save}
+     */
     @Transactional
     @SneakyThrows
     @Override
@@ -62,6 +68,9 @@ public class WorkerServiceImpl implements WorkerService {
         workerDao.save(worker);
     }
 
+    /**
+     * {@link WorkerService#getById}
+     */
     @Transactional
     @Override
     public WorkerGetView getById(Long id) {
@@ -75,6 +84,9 @@ public class WorkerServiceImpl implements WorkerService {
                 worker.getIsIdentified());
     }
 
+    /**
+     * {@link WorkerService#update}
+     */
     @SneakyThrows
     @Transactional
     @Override
@@ -121,6 +133,9 @@ public class WorkerServiceImpl implements WorkerService {
 
     }
 
+    /**
+     * {@link WorkerService#list}
+     */
     @Transactional
     @Override
     public List<WorkerListOutView> list(WorkerListView listView) {

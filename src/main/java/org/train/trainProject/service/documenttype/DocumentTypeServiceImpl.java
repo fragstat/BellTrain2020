@@ -11,6 +11,9 @@ import org.train.trainProject.view.documenttype.DocumentTypeView;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * {@link DocumentTypeService}
+ */
 @Service
 public class DocumentTypeServiceImpl implements DocumentTypeService {
     private final MapperFacade mapperFacade;
@@ -22,6 +25,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         this.dao = dao;
     }
 
+    /**
+     * {@link DocumentTypeService#save}
+     */
     @Transactional
     @Override
     public void save(@Valid DocumentTypeView documentTypeView) {
@@ -29,6 +35,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         dao.save(documentType);
     }
 
+    /**
+     * {@link DocumentTypeService#getById}
+     */
     @Override
     @Transactional(readOnly = true)
     public DocumentTypeView getById(Long id) {
@@ -36,6 +45,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         return mapperFacade.map(documentType, DocumentTypeView.class);
     }
 
+    /**
+     * {@link DocumentTypeService#getByCode}
+     */
     @Override
     @Transactional(readOnly = true)
     public DocumentTypeView getByCode(Integer code) {
@@ -43,6 +55,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         return mapperFacade.map(documentType, DocumentTypeView.class);
     }
 
+    /**
+     * {@link DocumentTypeService#getAll
+     */
     @Override
     @Transactional(readOnly = true)
     public List<DocumentTypeView> getAll() {
