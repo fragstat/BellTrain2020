@@ -66,7 +66,6 @@ public class Worker {
      * Документ
      */
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "document")
     private UserDocument document;
 
     /**

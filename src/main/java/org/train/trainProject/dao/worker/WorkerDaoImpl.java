@@ -14,6 +14,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link WorkerDao}
+ */
 @Repository
 public class WorkerDaoImpl implements WorkerDao {
     private final EntityManager em;
@@ -23,21 +26,33 @@ public class WorkerDaoImpl implements WorkerDao {
         this.em = em;
     }
 
+    /**
+     * {@link WorkerDao#save}
+     */
     @Override
     public void save(Worker worker) {
         em.persist(worker);
     }
 
+    /**
+     *  {@link WorkerDao#update}
+     */
     @Override
     public void update(Worker worker) {
         em.persist(worker);
     }
 
+    /**
+     *  {@link WorkerDao#getById}
+     */
     @Override
     public Worker getById(Long id) {
         return em.find(Worker.class, id);
     }
 
+    /**
+     *  {@link WorkerDao#list}
+     */
     @Override
     public List<Worker> list(WorkerListView workerListView) {
         CriteriaQuery<Worker> criteria = builder(workerListView.officeId, workerListView.firstName,
@@ -80,10 +95,8 @@ public class WorkerDaoImpl implements WorkerDao {
             predicates.add(
                     qb.equal(worker.get("citizenshipCode"), citizenshipCode));
         }
-        //query itself
         cq.select(worker)
                 .where(predicates.toArray(new Predicate[]{}));
-        //execute query and do something with result
         return cq;
     }
 }

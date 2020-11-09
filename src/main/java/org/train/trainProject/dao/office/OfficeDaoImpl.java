@@ -68,10 +68,8 @@ public class OfficeDaoImpl implements OfficeDao {
             predicates.add(
                     qb.equal(office.get("isActive"), isActive));
         }
-        //query itself
         cq.select(office)
                 .where(predicates.toArray(new Predicate[]{}));
-        //execute query and do something with result
         return cq;
     }
 }

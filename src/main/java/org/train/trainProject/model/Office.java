@@ -55,18 +55,18 @@ public class Office {
      */
     @JoinColumn(name = "org_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Organisation orgId;
+    private Organisation organisation;
 
-    public Office(String name, String address, String phone, Boolean isActive, Organisation orgId) {
+    public Office(String name, String address, String phone, Boolean isActive, Organisation organisation) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.isActive = isActive;
-        this.orgId = orgId;
+        this.organisation = organisation;
     }
 
-    public Office(Organisation orgId, String name, String address, String phone, Boolean isActive) {
-        this.orgId = orgId;
+    public Office(Organisation organisation, String name, String address, String phone, Boolean isActive) {
+        this.organisation = organisation;
         this.name = name;
         this.address = address;
         this.phone = phone;

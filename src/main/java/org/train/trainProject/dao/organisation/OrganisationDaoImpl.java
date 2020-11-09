@@ -77,10 +77,8 @@ public class OrganisationDaoImpl implements OrganisationDao {
             predicates.add(
                     qb.equal(organisation.get("isActive"), isActive));
         }
-        //query itself
         cq.select(organisation)
                 .where(predicates.toArray(new Predicate[]{}));
-        //execute query and do something with result
         return cq;
     }
 }

@@ -6,6 +6,9 @@ import org.train.trainProject.model.UserDocument;
 
 import javax.persistence.EntityManager;
 
+/**
+ * {@link UserDocumentDao}
+ */
 @Repository
 public class UserDocumentDaoImpl implements UserDocumentDao {
     private final EntityManager em;
@@ -15,16 +18,25 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
         this.em = em;
     }
 
+    /**
+     * {@link UserDocumentDao#save}
+     */
     @Override
     public void save(UserDocument userDocument) {
         em.persist(userDocument);
     }
 
+    /**
+     * {@link UserDocumentDao#update}
+     */
     @Override
     public void update(UserDocument userDocument) {
         em.persist(userDocument);
     }
 
+    /**
+     * {@link UserDocumentDao#getById}
+     */
     @Override
     public UserDocument getById(Long id) {
         return em.find(UserDocument.class, id);

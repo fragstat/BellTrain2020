@@ -57,8 +57,8 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<OfficeListOutView> list(@Valid OfficeListInView organizationView) {
-        List<Office> all = officeDao.list(organizationView);
+    public List<OfficeListOutView> list(@Valid OfficeListInView officeListInView) {
+        List<Office> all = officeDao.list(officeListInView);
         return mapperFacade.mapAsList(all, OfficeListOutView.class);
     }
 

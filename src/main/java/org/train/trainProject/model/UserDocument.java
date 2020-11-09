@@ -19,7 +19,7 @@ public class UserDocument {
      * Уникальный идентификатор
      */
     @Id
-    @Column(name = "worker_id")
+    @Column(name = "id")
     private Long id;
 
     /**
@@ -52,7 +52,7 @@ public class UserDocument {
     /**
      * Код документа
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "doc_code")
     private DocumentType docCode;
 

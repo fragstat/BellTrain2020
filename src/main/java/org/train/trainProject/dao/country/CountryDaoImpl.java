@@ -11,6 +11,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * {@link CountryDao}
+ */
 @Repository
 public class CountryDaoImpl implements CountryDao {
     private final EntityManager em;
@@ -20,11 +23,17 @@ public class CountryDaoImpl implements CountryDao {
         this.em = em;
     }
 
+    /**
+     * {@link CountryDao#getById}
+     */
     @Override
     public Country getById(Long id) {
         return em.find(Country.class, id);
     }
 
+    /**
+     * {@link CountryDao#getByCode}
+     */
     @Override
     public Country getByCode(Integer code) {
         CriteriaQuery<Country> criteria = buildCriteria(code);
@@ -32,11 +41,17 @@ public class CountryDaoImpl implements CountryDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@link CountryDao#save}
+     */
     @Override
     public void save(Country country) {
         em.persist(country);
     }
 
+    /**
+     * {@link CountryDao#getAll}
+     */
     @Override
     public List<Country> getAll() {
         TypedQuery<Country> query = em.createQuery("SELECT c FROM Country c", Country.class);

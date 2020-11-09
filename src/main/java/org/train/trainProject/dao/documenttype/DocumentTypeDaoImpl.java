@@ -11,6 +11,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
+/**
+ * {@link DocumentTypeDao}
+ */
 @Repository
 public class DocumentTypeDaoImpl implements DocumentTypeDao {
 
@@ -21,12 +24,17 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         this.em = em;
     }
 
-
+    /**
+     * {@link DocumentTypeDao#getById}
+     */
     @Override
     public DocumentType getById(Long id) {
         return em.find(DocumentType.class, id);
     }
 
+    /**
+     * {@link DocumentTypeDao#getByCode}
+     */
     @Override
     public DocumentType getByCode(Integer code) {
         CriteriaQuery<DocumentType> criteria = buildCodeCriteria(code);
@@ -34,6 +42,9 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@link DocumentTypeDao#getByName}
+     */
     @Override
     public DocumentType getByName(String name) {
         CriteriaQuery<DocumentType> criteria = buildNameCriteria(name);
@@ -41,11 +52,17 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
         return query.getSingleResult();
     }
 
+    /**
+     * {@link DocumentTypeDao#save}
+     */
     @Override
     public void save(DocumentType documentType) {
         em.persist(documentType);
     }
 
+    /**
+     * {@link DocumentTypeDao#getAll}
+     */
     @Override
     public List<DocumentType> getAll() {
         TypedQuery<DocumentType> query = em.createQuery("SELECT d FROM Document_Type d", DocumentType.class);
