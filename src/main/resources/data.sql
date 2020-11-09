@@ -8,8 +8,8 @@ INSERT INTO Document_Type (id, code, doc_name) VALUES (2, 21, 'Паспорт г
 INSERT INTO Country (id, code, country_name) VALUES (1, 643,'Российская Федерация');
 INSERT INTO Country (id, code, country_name) VALUES (2, 112,'Республика Беларусь');
 
-INSERT INTO Worker (id, version,  office_id, first_name, position_value, citizenship_code, is_identified) VALUES (1, 0, 1, 'Сергей', 'Java разработчик', 643, true);
-INSERT INTO Worker (id, version, office_id, first_name, position_value, citizenship_code, is_identified) VALUES (2, 0, 1, 'Александр', 'Управлящий', 112, true);
+INSERT INTO Worker (id, version,  office_id, first_name, position_value, citizenship_code, is_identified) VALUES (1, 0, 1, 'Сергей', 'Java разработчик', 1, true);
+INSERT INTO Worker (id, version, office_id, first_name, position_value, citizenship_code, is_identified) VALUES (2, 0, 1, 'Александр', 'Управлящий', 2, true);
 
-INSERT INTO User_Document (id, version, user_id, doc_code, doc_number, doc_date) VALUES (1,0,1, 21, '123456789101', NOW());
-INSERT INTO User_Document (id, version, user_id, doc_code, doc_number, doc_date) VALUES (2,0,3, 13, '123456789101', NOW());
+INSERT INTO User_Document (id, version, user_id, doc_code, doc_number, doc_date) VALUES (1,0,1, 1, '123456789101', NOW());
+INSERT INTO User_Document (id, version, user_id, doc_code, doc_number, doc_date) VALUES (2,0,2, 2, '123456789101', NOW());

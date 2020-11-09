@@ -60,14 +60,8 @@ CREATE TABLE IF NOT EXISTS Country (
 );
 COMMENT ON TABLE Country IS 'Страны';
 
-CREATE INDEX UX_Organisation_Id ON Organisation (id);
-
 CREATE INDEX IX_Office_Org_Id ON Office (org_id);
 ALTER TABLE Office ADD FOREIGN KEY (org_id) REFERENCES Organisation(id);
-
-CREATE INDEX UX_Office_Id ON Office (id);
-
-CREATE INDEX UX_Worker_Id ON Worker (id);
 
 CREATE INDEX IX_Worker_Office_Id ON Worker (office_id);
 ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
@@ -75,21 +69,11 @@ ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 CREATE INDEX IX_Worker_Citizenship_Code ON Worker (citizenship_code);
 ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(id);
 
-CREATE INDEX UX_User_Document_Id ON User_Document (id);
-
 CREATE INDEX IX_User_Document_User_Id ON User_Document (user_id);
 ALTER TABLE User_Document ADD FOREIGN KEY (user_id) REFERENCES Worker(id);
 
-CREATE INDEX IX_Document_Type_Id ON  Document_Type(id);
+CREATE INDEX IX_User_Document_Doc_Code ON User_Document (doc_code);
 ALTER TABLE User_Document ADD FOREIGN KEY (doc_code) REFERENCES Document_Type(id);
 
-CREATE INDEX UX_Document_Type_Id ON Document_Type(id);
 
-CREATE INDEX UX_Country_Code ON Country (id);
-
-CREATE INDEX UX_Organisation_Name ON Organisation (org_name);
-
-CREATE INDEX UX_Office_Office_Name ON Office (office_name);
-
-CREATE INDEX UX_Worker_First_Name ON Worker (first_name);
 
