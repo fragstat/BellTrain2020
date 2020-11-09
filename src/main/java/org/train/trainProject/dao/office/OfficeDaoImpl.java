@@ -1,5 +1,6 @@
 package org.train.trainProject.dao.office;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.train.trainProject.model.Office;
@@ -39,7 +40,8 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void update(Office organisation) {
-        em.persist(organisation);
+        Session session = em.unwrap(Session.class);
+        session.update(organisation);
     }
 
     @Override

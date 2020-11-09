@@ -13,7 +13,7 @@ public class WorkerSaveView {
 
     @ApiModelProperty(value = "Уникальный идентификатор офиса", example = "1")
     @NotNull(message = "officeId cannot be null")
-    @Min(1)
+    @Min(0)
     public Long officeId;
 
     @NotEmpty(message = "firstName cannot be null")

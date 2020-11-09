@@ -3,6 +3,7 @@ package org.train.trainProject.dao.country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.train.trainProject.model.Country;
+import org.train.trainProject.model.DocumentType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -36,8 +37,9 @@ public class CountryDaoImpl implements CountryDao {
      */
     @Override
     public Country getByCode(Integer code) {
-        CriteriaQuery<Country> criteria = buildCriteria(code);
-        TypedQuery<Country> query = em.createQuery(criteria);
+        String queryString = "SELECT c FROM Country c WHERE c.code = :code";
+        TypedQuery<Country> query = em.createQuery(queryString, Country.class);
+        query.setParameter("code", code);
         return query.getSingleResult();
     }
 

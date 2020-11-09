@@ -3,16 +3,13 @@ package org.train.trainProject.view.organisation;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @ApiModel(description = "Организация (обновление)")
 public class OrganisationUpdateView {
 
     @ApiModelProperty(value = "Уникальный идентификатор", example = "1")
-    @Size(min = 1,message = "id cannot be null")
+    @Min(0)
     public Long id;
 
     @Size(max = 50)

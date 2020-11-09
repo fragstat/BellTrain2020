@@ -1,5 +1,6 @@
 package org.train.trainProject.dao.organisation;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.train.trainProject.model.Organisation;
@@ -50,7 +51,8 @@ public class OrganisationDaoImpl implements OrganisationDao {
      */
     @Override
     public void update(Organisation organisation) {
-        em.persist(organisation);
+        Session session = em.unwrap(Session.class);
+        session.update(organisation);
     }
 
     /**

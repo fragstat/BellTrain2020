@@ -15,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Api(value = "OrganisationController", description = "Управление информацией об организации")
 @RestController
-@RequestMapping(value = "/api/organisation",produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/organization",produces = APPLICATION_JSON_VALUE)
 public class OrganisationController {
 
     private final OrganisationService organisationService;

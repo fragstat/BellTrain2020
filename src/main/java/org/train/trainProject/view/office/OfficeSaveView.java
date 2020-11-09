@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @ApiModel(description = "Офис (сохранение)")
 public class OfficeSaveView {
 
-    @Min(value = 1)
+    @Min(value = 0)
     @NotNull
     @ApiModelProperty(value = "Уникальный идентификатор организации", example = "1")
     public Long orgId;

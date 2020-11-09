@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.train.trainProject.model.DocumentType;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -37,8 +38,9 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
      */
     @Override
     public DocumentType getByCode(Integer code) {
-        CriteriaQuery<DocumentType> criteria = buildCodeCriteria(code);
-        TypedQuery<DocumentType> query = em.createQuery(criteria);
+        String queryString = "SELECT dt FROM Document_Type dt WHERE dt.code = :code";
+        TypedQuery<DocumentType> query = em.createQuery(queryString, DocumentType.class);
+        query.setParameter("code", code);
         return query.getSingleResult();
     }
 
@@ -47,8 +49,9 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
      */
     @Override
     public DocumentType getByName(String name) {
-        CriteriaQuery<DocumentType> criteria = buildNameCriteria(name);
-        TypedQuery<DocumentType> query = em.createQuery(criteria);
+        String queryString = "SELECT dt FROM Document_Type dt WHERE dt.name = :name";
+        TypedQuery<DocumentType> query = em.createQuery(queryString, DocumentType.class);
+        query.setParameter("name", name);
         return query.getSingleResult();
     }
 

@@ -1,5 +1,6 @@
 package org.train.trainProject.dao.worker;
 
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.train.trainProject.model.Worker;
@@ -39,7 +40,8 @@ public class WorkerDaoImpl implements WorkerDao {
      */
     @Override
     public void update(Worker worker) {
-        em.persist(worker);
+        Session session = em.unwrap(Session.class);
+        session.update(worker);
     }
 
     /**

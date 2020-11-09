@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class WorkerUpdateView {
 
     @NotNull(message = "id cannot be null")
-    @Min(1)
+    @Min(0)
     @ApiModelProperty(value = "Уникальный идентификатор", example = "1")
     public Long id;
 

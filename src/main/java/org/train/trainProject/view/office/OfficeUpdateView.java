@@ -5,13 +5,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ApiModel(description = "Офис (обновление)")
 public class OfficeUpdateView {
 
-    @Min(value = 1)
-    @Size(min = 1, message = "orgId cannot be null")
+    @Min(value = 0)
+    @NotNull(message = "orgId cannot be null")
     @ApiModelProperty(value = "Уникальный идентификатор", example = "1")
     public Long id;
 
