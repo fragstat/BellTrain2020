@@ -16,9 +16,12 @@ import org.train.trainProject.model.Worker;
 import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.view.worker.*;
 
+import javax.persistence.NoResultException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * {@link WorkerService}
@@ -49,15 +52,19 @@ public class WorkerServiceImpl implements WorkerService {
      * {@link WorkerService#save}
      */
     @Transactional
-    @SneakyThrows
     @Override
-    public void save(WorkerSaveView workerSaveView) {
+    public void save(WorkerSaveView workerSaveView) throws NoSuchElementException, ParseException {
         Worker worker = new Worker(workerSaveView.firstName, workerSaveView.secondName, workerSaveView.middleName,
                 workerSaveView.position, workerSaveView.phone, workerSaveView.isIdentified,
                 officeDao.loadById(workerSaveView.officeId));
         workerDao.save(worker);
 
-        DocumentType documentType = new DocumentType(workerSaveView.docName, workerSaveView.docCode);
+        DocumentType documentType;
+        try {
+            documentType = documentTypeDao.getByCode(workerSaveView.docCode);
+        } catch (NoResultException e) {
+            throw new NoResultException("no such document type");
+        }
         documentTypeDao.save(documentType);
 
         UserDocument userDocument = new UserDocument(worker.getId(), workerSaveView.docNumber,
@@ -98,7 +105,12 @@ public class WorkerServiceImpl implements WorkerService {
 
         UserDocument doc = worker.getDocument();
 
-        DocumentType docType = documentTypeDao.getByName(workerUpdateView.docName);
+        DocumentType docType = null;
+        try {
+            docType = documentTypeDao.getByName(workerUpdateView.docName);
+        } catch (NoResultException e) {
+            throw new NoResultException("no such document type");
+        }
         doc.setDocCode(docType);
         doc.setDocNumber(workerUpdateView.docNumber);
         doc.setDocDate(dateFormat.parse(workerUpdateView.docDate));

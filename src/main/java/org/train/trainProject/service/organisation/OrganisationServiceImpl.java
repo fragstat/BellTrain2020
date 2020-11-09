@@ -9,6 +9,7 @@ import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.service.office.OfficeService;
 import org.train.trainProject.view.organisation.*;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -69,6 +70,9 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Transactional(readOnly = true)
     public OrganisationGetView getById(Long id) {
         Organisation organisation = dao.loadById(id);
+        if (organisation == null) {
+            throw new NoResultException();
+        }
         return mapperFacade.map(organisation, OrganisationGetView.class);
     }
 }

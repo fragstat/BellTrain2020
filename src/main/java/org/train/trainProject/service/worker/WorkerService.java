@@ -8,6 +8,7 @@ import org.train.trainProject.view.office.OfficeListOutView;
 import org.train.trainProject.view.worker.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public interface WorkerService {
      *
      * @param workerSaveView валидируемое DTO из контроллера
      */
-    void save(@Valid WorkerSaveView workerSaveView);
+    void save(@Valid WorkerSaveView workerSaveView) throws ParseException;
 
     /**
      * Получить пользователя по id
