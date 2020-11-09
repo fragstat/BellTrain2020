@@ -46,12 +46,9 @@ public class OfficeServiceImpl implements OfficeService {
     @Transactional
     public void update(@Valid OfficeUpdateView updateView) {
         Office office = new Office(updateView.id, updateView.name, updateView.address);
-        if (updateView.phone != null) {
-            office.setPhone(updateView.phone);
-        }
-        if (updateView.isActive != null) {
-            office.setIsActive(updateView.isActive);
-        }
+        office.setPhone(updateView.phone);
+        office.setIsActive(updateView.isActive);
+
         officeDao.update(office);
     }
 

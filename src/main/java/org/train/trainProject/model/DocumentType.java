@@ -5,20 +5,31 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@SuppressWarnings("JpaDataSourceORMInspection")
+/**
+ * Тип документа
+ */
 @Data
 @NoArgsConstructor
 @Entity(name = "Document_Type")
 public class DocumentType {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    /**
+     * Название документа
+     */
     @Column(name = "doc_name", length = 100, nullable = false, unique = true)
     private String name;
 
+    /**
+     * Код документа
+     */
     @Column(name = "code", nullable = false)
     private Integer code;
 

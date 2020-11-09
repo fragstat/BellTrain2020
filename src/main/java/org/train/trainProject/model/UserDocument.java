@@ -7,31 +7,51 @@ import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Date;
 
-@SuppressWarnings("JpaDataSourceORMInspection")
+/**
+ * Документ
+ */
 @Data
 @Entity(name = "User_Document")
 @NoArgsConstructor
 public class UserDocument {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @Column(name = "worker_id")
     private Long id;
 
+    /**
+     * Служебное поле Hibernate
+     */
     @Version
     private Integer version;
 
+    /**
+     * Номер документа
+     */
     @Column(name = "doc_number", length = 20)
     private String docNumber;
 
+    /**
+     * Дата документа
+     */
     @Basic
     @Column(name = "doc_date")
     @Temporal(TemporalType.DATE)
     private Date docDate;
 
+    /**
+     * Пользователь, которому принадлежит документ
+     */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private Worker user;
 
+    /**
+     * Код документа
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_code")
     private DocumentType docCode;

@@ -46,12 +46,9 @@ public class OrganisationServiceImpl implements OrganisationService {
     public void update(@Valid OrganisationUpdateView updateView) {
         Organisation organisation = new Organisation(updateView.id, updateView.name, updateView.fullName,
                 updateView.inn, updateView.kpp, updateView.address);
-        if (updateView.phone != null) {
-            organisation.setPhone(updateView.phone);
-        }
-        if (updateView.isActive != null) {
-            organisation.setIsActive(updateView.isActive);
-        }
+        organisation.setPhone(updateView.phone);
+        organisation.setIsActive(updateView.isActive);
+
         dao.update(organisation);
     }
 

@@ -14,6 +14,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@link OrganisationDao}
+ */
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
 
@@ -24,6 +27,9 @@ public class OrganisationDaoImpl implements OrganisationDao {
         this.em = em;
     }
 
+    /**
+     * {@link OrganisationDao#list}
+     */
     @Override
     public List<Organisation> list(OrganisationListInView inView) {
         CriteriaQuery<Organisation> criteria = builder(inView.name, inView.inn, inView.isActive);
@@ -31,16 +37,25 @@ public class OrganisationDaoImpl implements OrganisationDao {
         return query.getResultList();
     }
 
+    /**
+     * {@link OrganisationDao#loadById}
+     */
     @Override
     public Organisation loadById(Long id) {
         return em.find(Organisation.class, id);
     }
 
+    /**
+     * {@link OrganisationDao#update}
+     */
     @Override
     public void update(Organisation organisation) {
         em.persist(organisation);
     }
 
+    /**
+     * {@link OrganisationDao#save}
+     */
     @Override
     public void save(Organisation organisation) {
         em.persist(organisation);

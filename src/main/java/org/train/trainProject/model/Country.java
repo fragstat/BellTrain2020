@@ -5,19 +5,30 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@SuppressWarnings("JpaDataSourceORMInspection")
+/**
+ * Страна
+ */
 @Data
 @Entity(name = "Country")
 @NoArgsConstructor
 public class Country {
 
+    /**
+     * Уникальный идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Код страны
+     */
     @Column(name = "code", nullable = false, unique = true)
     private Integer code;
 
+    /**
+     * Название страны
+     */
     @Column(name = "country_name", length = 100, nullable = false)
     private String countryName;
 

@@ -9,7 +9,10 @@ import org.train.trainProject.dao.documenttype.DocumentTypeDao;
 import org.train.trainProject.dao.office.OfficeDao;
 import org.train.trainProject.dao.userdocument.UserDocumentDao;
 import org.train.trainProject.dao.worker.WorkerDao;
-import org.train.trainProject.model.*;
+import org.train.trainProject.model.Country;
+import org.train.trainProject.model.DocumentType;
+import org.train.trainProject.model.UserDocument;
+import org.train.trainProject.model.Worker;
 import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.view.worker.*;
 
@@ -58,7 +61,7 @@ public class WorkerServiceImpl implements WorkerService {
         documentTypeDao.save(documentType);
 
         UserDocument userDocument = new UserDocument(worker.getId(), workerSaveView.docNumber,
-                dateFormat.parse(workerSaveView.docDate),worker, documentType);
+                dateFormat.parse(workerSaveView.docDate), worker, documentType);
         userDocumentDao.save(userDocument);
         worker.setDocument(userDocument);
 
@@ -94,40 +97,23 @@ public class WorkerServiceImpl implements WorkerService {
         Worker worker = workerDao.getById(workerUpdateView.id);
 
         UserDocument doc = worker.getDocument();
-        if (workerUpdateView.docName != null) {
-            DocumentType docType = documentTypeDao.getByName(workerUpdateView.docName);
-            doc.setDocCode(docType);
-        }
-        if (workerUpdateView.docNumber != null) {
-            doc.setDocNumber(workerUpdateView.docNumber);
-        }
-        if (workerUpdateView.docDate != null) {
-            doc.setDocDate(dateFormat.parse(workerUpdateView.docDate));
-        }
+
+        DocumentType docType = documentTypeDao.getByName(workerUpdateView.docName);
+        doc.setDocCode(docType);
+        doc.setDocNumber(workerUpdateView.docNumber);
+        doc.setDocDate(dateFormat.parse(workerUpdateView.docDate));
         userDocumentDao.save(doc);
 
-
-        if (workerUpdateView.officeId != null) {
-            worker.setOfficeId(officeDao.loadById(workerUpdateView.officeId));
-        }
+        worker.setOfficeId(officeDao.loadById(workerUpdateView.officeId));
         worker.setFirstName(workerUpdateView.firstName);
-        if (workerUpdateView.secondName != null) {
-            worker.setSecondName(workerUpdateView.secondName);
-        }
-        if (workerUpdateView.middleName != null) {
-            worker.setMiddleName(workerUpdateView.middleName);
-        }
+        worker.setSecondName(workerUpdateView.secondName);
+        worker.setMiddleName(workerUpdateView.middleName);
         worker.setPosition(workerUpdateView.position);
-        if (workerUpdateView.phone != null) {
-            worker.setPhone(workerUpdateView.phone);
-        }
-        if (workerUpdateView.citizenshipCode != null) {
-            Country country = countryDao.getByCode(workerUpdateView.citizenshipCode);
-            worker.setCitizenshipCode(country);
-        }
-        if (workerUpdateView.isIdentified != null) {
-            worker.setIsIdentified(workerUpdateView.isIdentified);
-        }
+        worker.setPhone(workerUpdateView.phone);
+        worker.setIsIdentified(workerUpdateView.isIdentified);
+
+        Country country = countryDao.getByCode(workerUpdateView.citizenshipCode);
+        worker.setCitizenshipCode(country);
 
         workerDao.save(worker);
 
