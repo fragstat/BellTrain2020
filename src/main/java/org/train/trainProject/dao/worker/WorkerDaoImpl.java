@@ -3,6 +3,9 @@ package org.train.trainProject.dao.worker;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import org.train.trainProject.model.Country;
+import org.train.trainProject.model.DocumentType;
 import org.train.trainProject.model.Worker;
 import org.train.trainProject.view.worker.WorkerListView;
 
@@ -14,6 +17,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * {@link WorkerDao}
@@ -56,16 +60,21 @@ public class WorkerDaoImpl implements WorkerDao {
      *  {@link WorkerDao#list}
      */
     @Override
-    public List<Worker> list(WorkerListView workerListView) {
+    public List<Worker> list(WorkerListView workerListView, Country country, DocumentType docCode) {
         CriteriaQuery<Worker> criteria = builder(workerListView.officeId, workerListView.firstName,
-                workerListView.lastName, workerListView.middleName, workerListView.position, workerListView.docCode,
-                workerListView.citizenshipCode);
+                workerListView.lastName, workerListView.middleName, workerListView.position, docCode,
+                country);
         TypedQuery<Worker> query = em.createQuery(criteria);
+        if (docCode != null) {
+            return query.getResultList().stream()
+                    .filter(worker -> worker.getDocument().getDocCode().equals(docCode))
+                    .collect(Collectors.toList());
+        }
         return query.getResultList();
     }
 
     private CriteriaQuery<Worker> builder(Long officeId, String firstName, String lastName, String middleName,
-                                          String position, Integer docCode, Integer citizenshipCode) {
+                                          String position, DocumentType docCode, Country country) {
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Worker> cq = qb.createQuery(Worker.class);
         Root<Worker> worker = cq.from(Worker.class);
@@ -89,13 +98,9 @@ public class WorkerDaoImpl implements WorkerDao {
             predicates.add(
                     qb.equal(worker.get("position"), position));
         }
-        if (docCode != null) {
+        if (country != null) {
             predicates.add(
-                    qb.equal(worker.get("docCode"), docCode));
-        }
-        if (citizenshipCode != null) {
-            predicates.add(
-                    qb.equal(worker.get("citizenshipCode"), citizenshipCode));
+                    qb.equal(worker.get("citizenshipCode"), country));
         }
         cq.select(worker)
                 .where(predicates.toArray(new Predicate[]{}));

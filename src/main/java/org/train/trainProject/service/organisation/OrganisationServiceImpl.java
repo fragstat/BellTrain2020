@@ -11,6 +11,7 @@ import org.train.trainProject.view.organisation.*;
 
 import javax.persistence.NoResultException;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,12 +46,18 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public void update(@Valid OrganisationUpdateView updateView) {
-        Organisation organisation = new Organisation(updateView.id, updateView.name, updateView.fullName,
-                updateView.inn, updateView.kpp, updateView.address);
-        organisation.setPhone(updateView.phone);
-        organisation.setIsActive(updateView.isActive);
-
-        dao.update(organisation);
+        Organisation org = dao.loadById(updateView.id);
+        if (org == null) {
+            throw new NoResultException("attempt to update organisation, which doesnt exist");
+        }
+        org.setOrgName(updateView.name);
+        org.setFullName(updateView.fullName);
+        org.setInn(updateView.inn);
+        org.setKpp(updateView.kpp);
+        org.setAddress(updateView.address);
+        org.setPhone(updateView.phone);
+        org.setIsActive(updateView.isActive);
+        dao.update(org);
     }
 
     /**
@@ -59,19 +66,23 @@ public class OrganisationServiceImpl implements OrganisationService {
     @Override
     @Transactional
     public List<OrganisationListOutView> list(@Valid OrganisationListInView organizationView) {
-        List<Organisation> filter = dao.list(organizationView);
-        return mapperFacade.mapAsList(filter, OrganisationListOutView.class);
+        try {
+            List<Organisation> filter = dao.list(organizationView);
+            return mapperFacade.mapAsList(filter, OrganisationListOutView.class);
+        } catch (NoResultException e) {
+            return Collections.emptyList();
+        }
     }
 
     /**
      * {@link OrganisationService#getById}
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public OrganisationGetView getById(Long id) {
         Organisation organisation = dao.loadById(id);
         if (organisation == null) {
-            throw new NoResultException();
+            throw new NoResultException("no such organisation");
         }
         return mapperFacade.map(organisation, OrganisationGetView.class);
     }

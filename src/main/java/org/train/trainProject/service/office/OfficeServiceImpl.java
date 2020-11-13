@@ -1,15 +1,19 @@
 package org.train.trainProject.service.office;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.train.trainProject.dao.office.OfficeDao;
 import org.train.trainProject.dao.organisation.OrganisationDao;
 import org.train.trainProject.model.Office;
+import org.train.trainProject.model.Organisation;
 import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.view.office.*;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,7 +38,11 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void save(@Valid OfficeSaveView saveView) {
-        Office office = new Office(organisationDao.loadById(saveView.orgId), saveView.name, saveView.address,
+        Organisation org = organisationDao.loadById(saveView.orgId);
+        if (org == null) {
+            throw new NoResultException("no such organisation");
+        }
+        Office office = new Office(org, saveView.name, saveView.address,
                 saveView.phone, saveView.isActive);
         officeDao.save(office);
     }
@@ -43,9 +51,13 @@ public class OfficeServiceImpl implements OfficeService {
      * {@link OfficeService#update}
      */
     @Override
-    @Transactional
     public void update(@Valid OfficeUpdateView updateView) {
-        Office office = new Office(updateView.id, updateView.name, updateView.address);
+        Office office = officeDao.loadById(updateView.id);
+        if (office == null) {
+            throw new NoResultException("attempt to update office, which doesnt exist");
+        }
+        office.setName(updateView.name);
+        office.setAddress(updateView.address);
         office.setPhone(updateView.phone);
         office.setIsActive(updateView.isActive);
 
@@ -58,17 +70,20 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional(readOnly = true)
     public List<OfficeListOutView> list(@Valid OfficeListInView officeListInView) {
-        List<Office> all = officeDao.list(officeListInView);
-        return mapperFacade.mapAsList(all, OfficeListOutView.class);
+            List<Office> all = officeDao.list(officeListInView);
+            return mapperFacade.mapAsList(all, OfficeListOutView.class);
     }
 
     /**
      * {@link OfficeService#getById}
      */
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     public OfficeGetView getById(Long id) {
         Office office = officeDao.loadById(id);
+        if (office == null) {
+            throw new NoResultException("no such office");
+        }
         return mapperFacade.map(office, OfficeGetView.class);
     }
 }

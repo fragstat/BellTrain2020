@@ -33,7 +33,7 @@ public class WorkerGetView {
     public String docNumber;
 
     @ApiModelProperty(value = "Дата документа", example = "2016-01-01")
-    public Date docDate;
+    public String docDate;
 
     @ApiModelProperty(value = "Название страны гражданства", example = "Российская Федерация")
     public String citizenshipName;
@@ -45,7 +45,7 @@ public class WorkerGetView {
     public Boolean isIdentified;
 
     public WorkerGetView(Long id, String firstName, String secondName, String middleName, String position, String phone,
-                         String docName, String docNumber, Date docDate, String citizenshipName,
+                         String docName, String docNumber, String docDate, String citizenshipName,
                          Integer citizenshipCode, Boolean isIdentified) {
         this.id = id;
         this.firstName = firstName;

@@ -84,7 +84,7 @@ public class Worker {
 
 
     public Worker(String firstName, String secondName, String middleName, String position, String phone,
-                  Boolean isIdentified, Office office) {
+                  Boolean isIdentified, Office office, Country country) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
@@ -92,6 +92,7 @@ public class Worker {
         this.phone = phone;
         this.isIdentified = isIdentified;
         this.officeId = office;
+        this.citizenshipCode = country;
     }
 
 }

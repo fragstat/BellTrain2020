@@ -8,6 +8,7 @@ import org.train.trainProject.model.DocumentType;
 import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.view.documenttype.DocumentTypeView;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,6 +43,9 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     @Transactional(readOnly = true)
     public DocumentTypeView getById(Long id) {
         DocumentType documentType = dao.getById(id);
+        if (documentType == null) {
+            throw new NoResultException("no such documentType");
+        }
         return mapperFacade.map(documentType, DocumentTypeView.class);
     }
 
@@ -51,8 +55,12 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     @Override
     @Transactional(readOnly = true)
     public DocumentTypeView getByCode(Integer code) {
-        DocumentType documentType = dao.getByCode(code);
-        return mapperFacade.map(documentType, DocumentTypeView.class);
+        try {
+            DocumentType documentType = dao.getByCode(code);
+            return mapperFacade.map(documentType, DocumentTypeView.class);
+        } catch (NoResultException e) {
+            throw new NoResultException("no such documentType");
+        }
     }
 
     /**

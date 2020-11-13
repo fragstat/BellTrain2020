@@ -3,6 +3,7 @@ package org.train.trainProject.dao.organisation;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.train.trainProject.model.Organisation;
 import org.train.trainProject.view.organisation.OrganisationListInView;
 
@@ -50,9 +51,12 @@ public class OrganisationDaoImpl implements OrganisationDao {
      * {@link OrganisationDao#update}
      */
     @Override
+    @Transactional
     public void update(Organisation organisation) {
-        Session session = em.unwrap(Session.class);
-        session.update(organisation);
+        try (Session session = em.unwrap(Session.class)) {
+            session.update(organisation);
+            session.flush();
+        }
     }
 
     /**

@@ -1,5 +1,7 @@
 package org.train.trainProject.dao.worker;
 
+import org.train.trainProject.model.Country;
+import org.train.trainProject.model.DocumentType;
 import org.train.trainProject.model.Organisation;
 import org.train.trainProject.model.Worker;
 import org.train.trainProject.view.worker.WorkerListView;
@@ -42,5 +44,5 @@ public interface WorkerDao {
      * @param workerListView DTO из контроллера
      * @return {@link Worker}
      */
-    List<Worker> list(WorkerListView workerListView);
+    List<Worker> list(WorkerListView workerListView, Country country, DocumentType docCode);
 }

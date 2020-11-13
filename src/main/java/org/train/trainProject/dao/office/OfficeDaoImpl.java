@@ -3,6 +3,7 @@ package org.train.trainProject.dao.office;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.train.trainProject.model.Office;
 import org.train.trainProject.model.Organisation;
 import org.train.trainProject.view.office.OfficeListInView;
@@ -39,14 +40,15 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     @Override
-    public void update(Office organisation) {
+    @Transactional
+    public void update(Office office) {
         Session session = em.unwrap(Session.class);
-        session.update(organisation);
+        session.update(office);
     }
 
     @Override
-    public void save(Office organisation) {
-        em.persist(organisation);
+    public void save(Office office) {
+        em.persist(office);
     }
 
     private CriteriaQuery<Office> builder(Long id, String name, String phone, Boolean isActive) {
@@ -57,7 +59,7 @@ public class OfficeDaoImpl implements OfficeDao {
 
         List<Predicate> predicates = new ArrayList<>();
 
-        predicates.add(qb.equal(office.get("orgId"), organisation));
+        predicates.add(qb.equal(office.get("organisation"), organisation));
         if (name != null) {
             predicates.add(
                     qb.equal(office.get("name"), name));

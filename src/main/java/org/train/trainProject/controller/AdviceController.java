@@ -1,6 +1,5 @@
 package org.train.trainProject.controller;
 
-import org.aspectj.lang.annotation.Aspect;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,22 +10,33 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import org.train.trainProject.view.ErrorView;
-import org.train.trainProject.view.ResponseView;
+import org.train.trainProject.view.aspect.ErrorView;
+import org.train.trainProject.view.aspect.ResponseView;
+import org.train.trainProject.view.aspect.SuccessView;
 
 import javax.persistence.NoResultException;
 import javax.validation.ConstraintViolationException;
+import java.text.ParseException;
 
 @ControllerAdvice
 public class AdviceController implements ResponseBodyAdvice<Object> {
 
-    @ExceptionHandler({ConstraintViolationException.class, NoResultException.class})
-    public ErrorView responseMyException(Exception e) {
-        return new ErrorView(e.getMessage());
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorView> constraintViolationExceptionHandler(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorView("wrong input parameters"));
     }
 
+    @ExceptionHandler(NoResultException.class)
+    public ResponseEntity<ErrorView> noResultExceptionHandler(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorView(e.getMessage()));
+    }
+
+    @ExceptionHandler(ParseException.class)
+    public ResponseEntity<ErrorView> parseExceptionHandler(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorView("wrong date format, required " +
+                "yyyy-mm-dd"));
+    }
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {

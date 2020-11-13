@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.train.trainProject.service.worker.WorkerService;
+import org.train.trainProject.view.aspect.SuccessView;
 import org.train.trainProject.view.worker.*;
 
 import javax.persistence.NoResultException;
@@ -34,61 +35,44 @@ public class WorkerController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    private ResponseEntity<Void> saveWorker(@RequestBody WorkerSaveView saveView) {
-        try {
-            workerService.save(saveView);
-        } catch (ParseException e) {
-            return ResponseEntity.status(500).build();
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.status(404).build();
-        }
-        return ResponseEntity.status(200).build();
+    private ResponseEntity<SuccessView> saveWorker(@RequestBody WorkerSaveView saveView) throws ParseException {
+        workerService.save(saveView);
+        return ResponseEntity.ok(new SuccessView());
     }
 
     @ApiOperation(value = "Обновить пользователя", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/update")
-    private ResponseEntity<?> updateWorker(@RequestBody WorkerUpdateView updateView) {
-        try {
+    private ResponseEntity<SuccessView> updateWorker(@RequestBody WorkerUpdateView updateView) {
             workerService.update(updateView);
-        } catch (NoResultException e) {
-            return ResponseEntity.status(404).build();
-        }
-        catch (ConstraintViolationException e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.ok(new SuccessView());
     }
 
     @ApiOperation(value = "Фильтровать пользователей", httpMethod = "POST")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/list")
     private ResponseEntity<?> filter(@RequestBody WorkerListView listView) {
-        try {
-            return ResponseEntity.ok(workerService.list(listView));
-        } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
+        return ResponseEntity.ok(workerService.list(listView));
     }
 
     @ApiOperation(value = "Найти пользователя по id", httpMethod = "GET")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/{id}")
     private ResponseEntity<?> getView(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(workerService.getById(id));
-        } catch (ConstraintViolationException e) {
-            return ResponseEntity.status(500).body(e.getMessage());
-        }
+        return ResponseEntity.ok(workerService.getById(id));
     }
 }

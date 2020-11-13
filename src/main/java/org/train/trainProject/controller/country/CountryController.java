@@ -5,8 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.train.trainProject.service.country.CountryService;
+import org.train.trainProject.view.aspect.SuccessView;
 import org.train.trainProject.view.country.CountryView;
 
 import java.util.List;
@@ -29,8 +31,9 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public void saveCountry(@RequestBody CountryView view) {
+    public ResponseEntity<SuccessView> saveCountry(@RequestBody CountryView view) {
         countryService.save(view);
+        return ResponseEntity.ok(new SuccessView());
     }
 
 
@@ -39,8 +42,8 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/")
-    public List<CountryView> getCountries() {
-        return countryService.getAll();
+    public ResponseEntity<List<CountryView>> getCountries() {
+        return ResponseEntity.ok(countryService.getAll());
     }
 
     @ApiOperation(value = "Получить страну по id", httpMethod = "GET")
@@ -48,8 +51,8 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/id/{id}")
-    public CountryView getCountryById(@PathVariable Long id) {
-        return countryService.getById(id);
+    public ResponseEntity<CountryView> getCountryById(@PathVariable Long id) {
+        return ResponseEntity.ok(countryService.getById(id));
     }
 
     @ApiOperation(value = "Получить страну по code", httpMethod = "GET")
@@ -57,7 +60,7 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/code/{code}")
-    public CountryView getCountryByCode(@PathVariable Integer code) {
-        return countryService.getByCode(code);
+    public ResponseEntity<CountryView> getCountryByCode(@PathVariable Integer code) {
+        return ResponseEntity.ok(countryService.getByCode(code));
     }
 }

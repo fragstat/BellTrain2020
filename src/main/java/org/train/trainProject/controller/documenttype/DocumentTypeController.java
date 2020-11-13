@@ -5,8 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.train.trainProject.service.documenttype.DocumentTypeService;
+import org.train.trainProject.view.aspect.SuccessView;
 import org.train.trainProject.view.documenttype.DocumentTypeView;
 
 import java.util.List;
@@ -30,31 +32,32 @@ public class DocumentTypeController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public void saveDocumentType(@RequestBody DocumentTypeView view) {
+    public ResponseEntity<SuccessView> saveDocumentType(@RequestBody DocumentTypeView view) {
         documentTypeService.save(view);
+        return ResponseEntity.status(200).body(new SuccessView());
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/")
-    public List<DocumentTypeView> getDocumentTypes() {
-        return documentTypeService.getAll();
+    public ResponseEntity<List<DocumentTypeView>> getDocumentTypes() {
+        return ResponseEntity.ok(documentTypeService.getAll());
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/id/{id}")
-    public DocumentTypeView getDocumentTypeById(@PathVariable Long id) {
-        return documentTypeService.getById(id);
+    public ResponseEntity<DocumentTypeView> getDocumentTypeById(@PathVariable Long id) {
+        return ResponseEntity.ok(documentTypeService.getById(id));
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/code/{code}")
-    public DocumentTypeView getDocumentTypeByCode(@PathVariable Integer code) {
-        return documentTypeService.getByCode(code);
+    public ResponseEntity<DocumentTypeView> getDocumentTypeByCode(@PathVariable Integer code) {
+        return ResponseEntity.ok(documentTypeService.getByCode(code));
     }
 }

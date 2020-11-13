@@ -8,6 +8,7 @@ import org.train.trainProject.model.Country;
 import org.train.trainProject.model.mapper.MapperFacade;
 import org.train.trainProject.view.country.CountryView;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -42,6 +43,9 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public CountryView getById(Long id) {
         Country country = countryDao.getById(id);
+        if (country == null) {
+            throw new NoResultException("no such country");
+        }
         return mapperFacade.map(country, CountryView.class);
     }
 
@@ -51,7 +55,12 @@ public class CountryServiceImpl implements CountryService {
     @Transactional
     @Override
     public CountryView getByCode(Integer code) {
-        Country country = countryDao.getByCode(code);
+        Country country = null;
+        try {
+            country = countryDao.getByCode(code);
+        } catch (NoResultException e) {
+            throw new NoResultException("no such country");
+        }
         return mapperFacade.map(country, CountryView.class);
     }
 
