@@ -62,11 +62,6 @@ public class WorkerDaoImpl implements WorkerDao {
         CriteriaQuery<Worker> criteria = builder(workerListView.officeId, workerListView.firstName,
                 workerListView.lastName, workerListView.middleName, workerListView.position, country, docCode);
         TypedQuery<Worker> query = em.createQuery(criteria);
-//        if (docCode != null) {
-//            return query.getResultList().stream()
-//                    .filter(worker -> worker.getDocument().getDocCode().equals(docCode))
-//                    .collect(Collectors.toList());
-//        }
         return query.getResultList();
     }
 

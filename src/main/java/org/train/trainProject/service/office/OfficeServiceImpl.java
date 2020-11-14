@@ -60,8 +60,6 @@ public class OfficeServiceImpl implements OfficeService {
         office.setAddress(updateView.address);
         office.setPhone(updateView.phone);
         office.setIsActive(updateView.isActive);
-
-        officeDao.update(office);
     }
 
     /**
