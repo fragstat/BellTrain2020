@@ -11,6 +11,8 @@ import org.train.trainProject.service.organisation.OrganisationService;
 import org.train.trainProject.view.aspect.SuccessView;
 import org.train.trainProject.view.organisation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Api(value = "OrganisationController", description = "Управление информацией об организации")
@@ -53,8 +55,8 @@ public class OrganisationController {
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/list")
     public @ResponseBody
-    ResponseEntity<?> organisationList(@RequestBody OrganisationListInView organisationListInView) {
-        return ResponseEntity.ok(organisationService.list(organisationListInView));
+    List<OrganisationListOutView> organisationList(@RequestBody OrganisationListInView organisationListInView) {
+        return organisationService.list(organisationListInView);
     }
 
     @ApiOperation(value = "Найти офис по id", httpMethod = "GET")
@@ -62,7 +64,7 @@ public class OrganisationController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/{id}")
-    public ResponseEntity<?> organisationById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(organisationService.getById(id));
+    public OrganisationGetView organisationById(@PathVariable("id") Long id) {
+        return organisationService.getById(id);
     }
 }

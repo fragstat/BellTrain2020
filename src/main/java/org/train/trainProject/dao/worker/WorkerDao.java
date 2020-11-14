@@ -44,5 +44,5 @@ public interface WorkerDao {
      * @param workerListView DTO из контроллера
      * @return {@link Worker}
      */
-    List<Worker> list(WorkerListView workerListView, Country country, DocumentType docCode);
+    List<Worker> list(WorkerListView workerListView, Integer country, Integer docCode);
 }

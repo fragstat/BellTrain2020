@@ -62,8 +62,8 @@ public class WorkerController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/list")
-    private ResponseEntity<?> filter(@RequestBody WorkerListView listView) {
-        return ResponseEntity.ok(workerService.list(listView));
+    private List<WorkerListOutView> filter(@RequestBody WorkerListView listView) {
+        return workerService.list(listView);
     }
 
     @ApiOperation(value = "Найти пользователя по id", httpMethod = "GET")
@@ -72,7 +72,7 @@ public class WorkerController {
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/{id}")
-    private ResponseEntity<?> getView(@PathVariable Long id) {
-        return ResponseEntity.ok(workerService.getById(id));
+    private WorkerGetView getView(@PathVariable Long id) {
+        return workerService.getById(id);
     }
 }

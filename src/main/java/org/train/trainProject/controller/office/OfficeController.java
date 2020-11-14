@@ -43,9 +43,9 @@ public class OfficeController {
             @ApiResponse(code = 404, message = "Not Found"),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/update")
-    public ResponseEntity<SuccessView> officeUpdate(@RequestBody OfficeUpdateView officeUpdateView) {
+    public SuccessView officeUpdate(@RequestBody OfficeUpdateView officeUpdateView) {
         officeService.update(officeUpdateView);
-        return ResponseEntity.status(200).body(new SuccessView());
+        return new SuccessView();
     }
 
     @ApiOperation(value = "Фильтровать офисы", httpMethod = "POST")
@@ -55,8 +55,8 @@ public class OfficeController {
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/list")
     public @ResponseBody
-    ResponseEntity<List<OfficeListOutView>> officeList(@RequestBody OfficeListInView officeListInView) {
-        return ResponseEntity.ok(officeService.list(officeListInView));
+    List<OfficeListOutView> officeList(@RequestBody OfficeListInView officeListInView) {
+        return officeService.list(officeListInView);
     }
 
     @ApiOperation(value = "Найти офис по id", httpMethod = "GET")
@@ -64,8 +64,8 @@ public class OfficeController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/{id}")
-    public ResponseEntity<OfficeGetView> officeById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(officeService.getById(id));
+    public OfficeGetView officeById(@PathVariable("id") Long id) {
+        return officeService.getById(id);
     }
 
 }

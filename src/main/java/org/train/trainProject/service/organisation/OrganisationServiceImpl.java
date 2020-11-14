@@ -57,7 +57,6 @@ public class OrganisationServiceImpl implements OrganisationService {
         org.setAddress(updateView.address);
         org.setPhone(updateView.phone);
         org.setIsActive(updateView.isActive);
-        dao.update(org);
     }
 
     /**

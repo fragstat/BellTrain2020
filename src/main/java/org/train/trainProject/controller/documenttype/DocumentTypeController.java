@@ -32,32 +32,32 @@ public class DocumentTypeController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public ResponseEntity<SuccessView> saveDocumentType(@RequestBody DocumentTypeView view) {
+    public SuccessView saveDocumentType(@RequestBody DocumentTypeView view) {
         documentTypeService.save(view);
-        return ResponseEntity.status(200).body(new SuccessView());
+        return new SuccessView();
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/")
-    public ResponseEntity<List<DocumentTypeView>> getDocumentTypes() {
-        return ResponseEntity.ok(documentTypeService.getAll());
+    public List<DocumentTypeView> getDocumentTypes() {
+        return documentTypeService.getAll();
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/id/{id}")
-    public ResponseEntity<DocumentTypeView> getDocumentTypeById(@PathVariable Long id) {
-        return ResponseEntity.ok(documentTypeService.getById(id));
+    public DocumentTypeView getDocumentTypeById(@PathVariable Long id) {
+        return documentTypeService.getById(id);
     }
 
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/code/{code}")
-    public ResponseEntity<DocumentTypeView> getDocumentTypeByCode(@PathVariable Integer code) {
-        return ResponseEntity.ok(documentTypeService.getByCode(code));
+    public DocumentTypeView getDocumentTypeByCode(@PathVariable Integer code) {
+        return documentTypeService.getByCode(code);
     }
 }

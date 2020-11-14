@@ -31,9 +31,9 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/save")
-    public ResponseEntity<SuccessView> saveCountry(@RequestBody CountryView view) {
+    public SuccessView saveCountry(@RequestBody CountryView view) {
         countryService.save(view);
-        return ResponseEntity.ok(new SuccessView());
+        return new SuccessView();
     }
 
 
@@ -42,8 +42,8 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/")
-    public ResponseEntity<List<CountryView>> getCountries() {
-        return ResponseEntity.ok(countryService.getAll());
+    public List<CountryView> getCountries() {
+        return countryService.getAll();
     }
 
     @ApiOperation(value = "Получить страну по id", httpMethod = "GET")
@@ -51,8 +51,8 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/id/{id}")
-    public ResponseEntity<CountryView> getCountryById(@PathVariable Long id) {
-        return ResponseEntity.ok(countryService.getById(id));
+    public CountryView getCountryById(@PathVariable Long id) {
+        return countryService.getById(id);
     }
 
     @ApiOperation(value = "Получить страну по code", httpMethod = "GET")
@@ -60,7 +60,7 @@ public class CountryController {
             @ApiResponse(code = 200, message = "Success", response = String.class),
             @ApiResponse(code = 404, message = "Not Found")})
     @GetMapping("/code/{code}")
-    public ResponseEntity<CountryView> getCountryByCode(@PathVariable Integer code) {
-        return ResponseEntity.ok(countryService.getByCode(code));
+    public CountryView getCountryByCode(@PathVariable Integer code) {
+        return countryService.getByCode(code);
     }
 }

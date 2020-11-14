@@ -10,10 +10,7 @@ import org.train.trainProject.view.office.OfficeListInView;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,14 +49,13 @@ public class OfficeDaoImpl implements OfficeDao {
     }
 
     private CriteriaQuery<Office> builder(Long id, String name, String phone, Boolean isActive) {
-        Organisation organisation = em.find(Organisation.class, id);
         CriteriaBuilder qb = em.getCriteriaBuilder();
         CriteriaQuery<Office> cq = qb.createQuery(Office.class);
         Root<Office> office = cq.from(Office.class);
-
+        Join<Office, Organisation> join = office.join("organisation");
         List<Predicate> predicates = new ArrayList<>();
 
-        predicates.add(qb.equal(office.get("organisation"), organisation));
+        predicates.add(qb.equal(join.get("id"), id));
         if (name != null) {
             predicates.add(
                     qb.equal(office.get("name"), name));

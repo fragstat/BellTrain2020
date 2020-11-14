@@ -159,8 +159,6 @@ public class WorkerServiceImpl implements WorkerService {
             throw new NoResultException("attempt to use citizenshipCode, which doesnt exist");
         }
 
-        workerDao.save(worker);
-
     }
 
     /**
@@ -170,19 +168,17 @@ public class WorkerServiceImpl implements WorkerService {
     @Override
     public List<WorkerListOutView> list(WorkerListView listView) {
         try {
-            Country country;
             try {
-                country = countryDao.getByCode(listView.citizenshipCode);
+                countryDao.getByCode(listView.citizenshipCode);
             } catch (EmptyResultDataAccessException e) {
                 throw new NoResultException("no such citizenshipCode");
             }
-            DocumentType documentType;
             try {
-                documentType = documentTypeDao.getByCode(listView.docCode);
+                documentTypeDao.getByCode(listView.docCode);
             } catch (EmptyResultDataAccessException e) {
                 throw new NoResultException("no such docCode");
             }
-            List<Worker> all = workerDao.list(listView, country, documentType);
+            List<Worker> all = workerDao.list(listView, listView.citizenshipCode, listView.docCode);
             return mapperFacade.mapAsList(all, WorkerListOutView.class);
         } catch (EmptyResultDataAccessException e) {
             return Collections.emptyList();

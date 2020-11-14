@@ -29,7 +29,7 @@ public class AdviceController implements ResponseBodyAdvice<Object> {
 
     @ExceptionHandler(NoResultException.class)
     public ResponseEntity<ErrorView> noResultExceptionHandler(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorView(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorView(e.getMessage()));
     }
 
     @ExceptionHandler(ParseException.class)

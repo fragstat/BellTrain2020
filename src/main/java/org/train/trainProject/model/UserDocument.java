@@ -46,7 +46,7 @@ public class UserDocument {
      * Пользователь, которому принадлежит документ
      */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @MapsId
     private Worker user;
 
     /**
