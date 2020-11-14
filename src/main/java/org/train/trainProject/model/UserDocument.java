@@ -11,7 +11,8 @@ import java.util.Date;
  * Документ
  */
 @Data
-@Entity(name = "User_Document")
+@Entity
+@Table(name = "User_Document")
 @NoArgsConstructor
 public class UserDocument {
 
@@ -47,6 +48,7 @@ public class UserDocument {
      */
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @MapsId
+    @JoinColumn(name = "id")
     private Worker user;
 
     /**

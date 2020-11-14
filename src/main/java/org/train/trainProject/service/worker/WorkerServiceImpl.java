@@ -68,7 +68,6 @@ public class WorkerServiceImpl implements WorkerService {
         } catch (EmptyResultDataAccessException e) {
             throw new NoResultException("attempt to use documentType, which doesnt exist");
         }
-        documentTypeDao.save(documentType);
 
         Country country;
         try {
