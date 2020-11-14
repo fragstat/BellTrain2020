@@ -68,7 +68,6 @@ ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 CREATE INDEX IX_Worker_Citizenship_Code ON Worker (citizenship_code);
 ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(id);
 
-CREATE INDEX IX_User_Document_User_Id ON User_Document (id);
 ALTER TABLE User_Document ADD FOREIGN KEY (id) REFERENCES Worker(id);
 
 CREATE INDEX IX_User_Document_Doc_Code ON User_Document (doc_code);
