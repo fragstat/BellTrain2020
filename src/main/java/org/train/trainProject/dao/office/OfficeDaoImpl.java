@@ -24,6 +24,9 @@ public class OfficeDaoImpl implements OfficeDao {
         this.em = em;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Office> list(OfficeListInView inView) {
         CriteriaQuery<Office> criteria = builder(inView.orgId, inView.name, inView.phone, inView.isActive);
@@ -31,11 +34,17 @@ public class OfficeDaoImpl implements OfficeDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Office loadById(Long id) {
         return em.find(Office.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void update(Office office) {
@@ -43,6 +52,9 @@ public class OfficeDaoImpl implements OfficeDao {
         session.update(office);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Office office) {
         em.persist(office);

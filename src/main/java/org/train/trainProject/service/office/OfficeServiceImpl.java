@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * {@link OfficeService}
+ * {@inheritDoc}
  */
 @Service
 public class OfficeServiceImpl implements OfficeService {
@@ -33,7 +33,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * {@link OfficeService#save}
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -48,7 +48,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * {@link OfficeService#update}
+     * {@inheritDoc}
      */
     @Override
     public void update(@Valid OfficeUpdateView updateView) {
@@ -63,7 +63,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * {@link OfficeService#list}
+     * {@inheritDoc}
      */
     @Override
     @Transactional(readOnly = true)
@@ -73,7 +73,7 @@ public class OfficeServiceImpl implements OfficeService {
     }
 
     /**
-     * {@link OfficeService#getById}
+     * {@inheritDoc}
      */
     @Override
     @Transactional

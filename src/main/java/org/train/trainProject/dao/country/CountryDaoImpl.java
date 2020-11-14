@@ -25,7 +25,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * {@link CountryDao#getById}
+     * {@inheritDoc}
      */
     @Override
     public Country getById(Long id) {
@@ -33,7 +33,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * {@link CountryDao#getByCode}
+     * {@inheritDoc}
      */
     @Override
     public Country getByCode(Integer code) {
@@ -44,7 +44,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * {@link CountryDao#save}
+     * {@inheritDoc}
      */
     @Override
     public void save(Country country) {
@@ -52,7 +52,7 @@ public class CountryDaoImpl implements CountryDao {
     }
 
     /**
-     * {@link CountryDao#getAll}
+     * {@inheritDoc}
      */
     @Override
     public List<Country> getAll() {

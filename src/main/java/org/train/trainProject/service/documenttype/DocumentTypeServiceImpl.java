@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * {@link DocumentTypeService}
+ * {@inheritDoc}
  */
 @Service
 public class DocumentTypeServiceImpl implements DocumentTypeService {
@@ -27,7 +27,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
 
     /**
-     * {@link DocumentTypeService#save}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -37,7 +37,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
 
     /**
-     * {@link DocumentTypeService#getById}
+     * {@inheritDoc}
      */
     @Override
     @Transactional(readOnly = true)
@@ -50,7 +50,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
 
     /**
-     * {@link DocumentTypeService#getByCode}
+     * {@inheritDoc}
      */
     @Override
     @Transactional(readOnly = true)
@@ -64,7 +64,7 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     }
 
     /**
-     * {@link DocumentTypeService#getAll
+     * {@inheritDoc}
      */
     @Override
     @Transactional(readOnly = true)

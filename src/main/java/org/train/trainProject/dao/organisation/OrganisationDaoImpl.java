@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@link OrganisationDao}
+ * {@inheritDoc}
  */
 @Repository
 public class OrganisationDaoImpl implements OrganisationDao {
@@ -30,7 +30,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * {@link OrganisationDao#list}
+     * {@inheritDoc}
      */
     @Override
     public List<Organisation> list(OrganisationListInView inView) {
@@ -40,7 +40,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * {@link OrganisationDao#loadById}
+     * {@inheritDoc}
      */
     @Override
     public Organisation loadById(Long id) {
@@ -48,7 +48,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * {@link OrganisationDao#update}
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -60,7 +60,7 @@ public class OrganisationDaoImpl implements OrganisationDao {
     }
 
     /**
-     * {@link OrganisationDao#save}
+     * {@inheritDoc}
      */
     @Override
     public void save(Organisation organisation) {

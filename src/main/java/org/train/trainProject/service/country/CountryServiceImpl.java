@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * {@link CountryService}
+ * {@inheritDoc}
  */
 @Service
 public class CountryServiceImpl implements CountryService {
@@ -27,7 +27,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     /**
-     * {@link CountryService#save}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -37,7 +37,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     /**
-     * {@link CountryService#getById}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -50,7 +50,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     /**
-     * {@link CountryService#getByCode}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -65,7 +65,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     /**
-     * {@link CountryService#getAll}
+     * {@inheritDoc}
      */
     @Transactional
     @Override

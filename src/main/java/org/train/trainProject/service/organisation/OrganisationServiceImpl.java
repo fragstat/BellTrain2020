@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * {@link OrganisationService}
+ * {@inheritDoc}
  */
 @Service
 public class OrganisationServiceImpl implements OrganisationService {
@@ -30,7 +30,7 @@ public class OrganisationServiceImpl implements OrganisationService {
 
 
     /**
-     * {@link OrganisationService#save}
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -41,7 +41,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * {@link OrganisationService#update}
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -60,7 +60,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * {@link OrganisationService#list}
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -74,7 +74,7 @@ public class OrganisationServiceImpl implements OrganisationService {
     }
 
     /**
-     * {@link OrganisationService#getById}
+     * {@inheritDoc}
      */
     @Override
     @Transactional

@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * {@link WorkerService}
+ * {@inheritDoc}
  */
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -50,7 +50,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * {@link WorkerService#save}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -90,7 +90,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * {@link WorkerService#getById}
+     * {@inheritDoc}
      */
     @Transactional
     @Override
@@ -115,7 +115,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * {@link WorkerService#update}
+     * {@inheritDoc}
      */
     @SneakyThrows
     @Transactional
@@ -162,7 +162,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     /**
-     * {@link WorkerService#list}
+     * {@inheritDoc}
      */
     @Transactional
     @Override

@@ -39,7 +39,6 @@ COMMENT ON TABLE Worker IS 'Пользователь';
 CREATE TABLE IF NOT EXISTS User_Document (
     id INTEGER COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version INTEGER NOT NULL COMMENT 'Служебное поле hibernate',
-    user_id INTEGER UNIQUE NOT NULL COMMENT 'Пользователь, кому принадлежит документ',
     doc_code INTEGER COMMENT 'Код документа',
     doc_number VARCHAR(20) COMMENT 'Номер документа',
     doc_date DATE COMMENT 'Дата выдачи документа'
@@ -69,8 +68,8 @@ ALTER TABLE Worker ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 CREATE INDEX IX_Worker_Citizenship_Code ON Worker (citizenship_code);
 ALTER TABLE Worker ADD FOREIGN KEY (citizenship_code) REFERENCES Country(id);
 
-CREATE INDEX IX_User_Document_User_Id ON User_Document (user_id);
-ALTER TABLE User_Document ADD FOREIGN KEY (user_id) REFERENCES Worker(id);
+CREATE INDEX IX_User_Document_User_Id ON User_Document (id);
+ALTER TABLE User_Document ADD FOREIGN KEY (id) REFERENCES Worker(id);
 
 CREATE INDEX IX_User_Document_Doc_Code ON User_Document (doc_code);
 ALTER TABLE User_Document ADD FOREIGN KEY (doc_code) REFERENCES Document_Type(id);

@@ -13,7 +13,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 /**
- * {@link DocumentTypeDao}
+ * {@inheritDoc}
  */
 @Repository
 public class DocumentTypeDaoImpl implements DocumentTypeDao {
@@ -26,7 +26,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * {@link DocumentTypeDao#getById}
+     * {@inheritDoc}
      */
     @Override
     public DocumentType getById(Long id) {
@@ -34,7 +34,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * {@link DocumentTypeDao#getByCode}
+     * {@inheritDoc}
      */
     @Override
     public DocumentType getByCode(Integer code) {
@@ -45,7 +45,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * {@link DocumentTypeDao#getByName}
+     * {@inheritDoc}
      */
     @Override
     public DocumentType getByName(String name) {
@@ -56,7 +56,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * {@link DocumentTypeDao#save}
+     * {@inheritDoc}
      */
     @Override
     public void save(DocumentType documentType) {
@@ -64,7 +64,7 @@ public class DocumentTypeDaoImpl implements DocumentTypeDao {
     }
 
     /**
-     * {@link DocumentTypeDao#getAll}
+     * {@inheritDoc}
      */
     @Override
     public List<DocumentType> getAll() {

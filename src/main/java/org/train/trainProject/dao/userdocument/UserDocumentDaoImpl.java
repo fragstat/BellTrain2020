@@ -8,7 +8,7 @@ import org.train.trainProject.model.UserDocument;
 import javax.persistence.EntityManager;
 
 /**
- * {@link UserDocumentDao}
+ * {@inheritDoc}
  */
 @Repository
 public class UserDocumentDaoImpl implements UserDocumentDao {
@@ -20,7 +20,7 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * {@link UserDocumentDao#save}
+     * {@inheritDoc}
      */
     @Override
     public void save(UserDocument userDocument) {
@@ -28,7 +28,7 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * {@link UserDocumentDao#update}
+     * {@inheritDoc}
      */
     @Override
     public void update(UserDocument userDocument) {
@@ -37,7 +37,7 @@ public class UserDocumentDaoImpl implements UserDocumentDao {
     }
 
     /**
-     * {@link UserDocumentDao#getById}
+     * {@inheritDoc}
      */
     @Override
     public UserDocument getById(Long id) {

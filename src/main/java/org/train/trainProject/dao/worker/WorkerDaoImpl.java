@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * {@link WorkerDao}
+ * {@inheritDoc}
  */
 @Repository
 public class WorkerDaoImpl implements WorkerDao {
@@ -30,7 +30,7 @@ public class WorkerDaoImpl implements WorkerDao {
     }
 
     /**
-     * {@link WorkerDao#save}
+     * {@inheritDoc}
      */
     @Override
     public void save(Worker worker) {
@@ -38,7 +38,7 @@ public class WorkerDaoImpl implements WorkerDao {
     }
 
     /**
-     *  {@link WorkerDao#update}
+     * {@inheritDoc}
      */
     @Override
     public void update(Worker worker) {
@@ -47,7 +47,7 @@ public class WorkerDaoImpl implements WorkerDao {
     }
 
     /**
-     *  {@link WorkerDao#getById}
+     * {@inheritDoc}
      */
     @Override
     public Worker getById(Long id) {
@@ -55,7 +55,7 @@ public class WorkerDaoImpl implements WorkerDao {
     }
 
     /**
-     *  {@link WorkerDao#list}
+     * {@inheritDoc}
      */
     @Override
     public List<Worker> list(WorkerListView workerListView, Integer country, Integer docCode) {
