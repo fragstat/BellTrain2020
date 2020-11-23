@@ -1,4 +1,5 @@
 INSERT INTO Organisation (id, version, org_name, full_name, inn, kpp, address, phone, is_active) VALUES (1, 0, 'ТД "Арсенал-Метиз"','Торговый дом "Арсенал-Метиз"', '5008055603', '500801001', 'г. Долгопрудный, Лихачевский проспект, д.18, стр.1', '74995037363', true );
+INSERT INTO Organisation (id, version, org_name, full_name, inn, kpp, address, phone, is_active) VALUES (2, 0, 'ТД "Арсенал-Метиз"','Торговый дом "Арсенал-Метиз"', '5008055603', '500801001', 'г. Долгопрудный, Лихачевский проспект, д.18, стр.1', '74995037363', true );
 
 INSERT INTO Office (id, version, org_id, office_name, address, phone, is_active) VALUES (1, 0, 1, 'Долгопрудный', 'г. Долгопрудный, Лихачевский проспект, д.18, стр.1', '74995037363', true);
 

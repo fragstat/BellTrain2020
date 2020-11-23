@@ -26,14 +26,6 @@ public class OrganisationServiceUnitTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    public void organisationServiceTest() throws Exception {
-
-        save();
-        get();
-        update();
-        list();
-    }
-
     private void save() throws Exception {
         OrganisationSavePostView organisation = new OrganisationSavePostView("Назавание", "Полное название", "1234567898", "123456789",
                 "Москва", "79684543193", true);
@@ -43,10 +35,11 @@ public class OrganisationServiceUnitTest {
         assert (sv != null && sv.result.equals("success"));
     }
 
+    @Test
     private void get() throws Exception {
-        OrganisationGetView organisationGet = new OrganisationGetView(1L , "Назавание", "Полное название",
-                "1234567898",
-                "123456789", "Москва", "79684543193", true);
+        OrganisationGetView organisationGet = new OrganisationGetView(1L , "ТД \"Арсенал-Метиз\"", "Торговый дом \"Арсенал-Метиз\"",
+                "5008055603",
+                "500801001", "г. Долгопрудный, Лихачевский проспект, д.18, стр.1", "74995037363", true);
         ResponseEntity<String> entityGet = restTemplate.getForEntity(
                 "/api/organization/1", String.class);
         String json = entityGet.getBody();
@@ -55,8 +48,9 @@ public class OrganisationServiceUnitTest {
         assert (organisationGet.equals(orgGet));
     }
 
+    @Test
     private void update() throws Exception {
-        OrganisationUpdateView organisationUpdate = new OrganisationUpdateView(1L, "Новое название",
+        OrganisationUpdateView organisationUpdate = new OrganisationUpdateView(2L, "Новое название",
                 "Новое полное название", "12345654321", "987654321","Новая Москва",
                 "79684549331", false);
         ResponseEntity<SuccessView> entityUpdateResult = restTemplate.postForEntity("/api/organization/update",
@@ -65,9 +59,10 @@ public class OrganisationServiceUnitTest {
         assert (svUpdate != null && svUpdate.result.equals("success"));
     }
 
+    @Test
     public void list() throws Exception {
-        OrganisationListInView organisationListPost = new OrganisationListInView("Новое название", "12345654321",
-                false);
+        OrganisationListInView organisationListPost = new OrganisationListInView("ТД \"Арсенал-Метиз\"", "5008055603",
+                true);
         ResponseEntity<String> entityList = restTemplate.postForEntity("/api/organization/list", organisationListPost,
                 String.class);
         String jsonFromList = entityList.getBody();
@@ -75,7 +70,7 @@ public class OrganisationServiceUnitTest {
                 OrganisationListResponseView.class);
         List<OrganisationListOutView> orgList = responseList.data;
         OrganisationListOutView orgListOutView = orgList.get(0);
-        OrganisationListOutView organisationListView = new OrganisationListOutView(1L, "12345654321", false);
+        OrganisationListOutView organisationListView = new OrganisationListOutView(1L, "5008055603", true);
         assert organisationListView.equals(orgListOutView);
     }
 }
