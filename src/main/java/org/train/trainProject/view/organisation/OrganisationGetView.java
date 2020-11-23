@@ -2,6 +2,8 @@ package org.train.trainProject.view.organisation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+
 
 @ApiModel(description = "Организация (по id)")
 public class OrganisationGetView {
@@ -29,4 +31,8 @@ public class OrganisationGetView {
 
     @ApiModelProperty(value = "Действующая", example = "true")
     public Boolean isActive;
+
+    public OrganisationGetView() {
+    }
+
 }
