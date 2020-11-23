@@ -1,4 +1,4 @@
-package org.train.trainProject.view;
+package org.train.trainProject.view.organisationtest;
 
 import lombok.AllArgsConstructor;
 

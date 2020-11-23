@@ -2,9 +2,13 @@ package org.train.trainProject.view.organisation;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @ApiModel(description = "Организация (обновление)")
 public class OrganisationUpdateView {
 

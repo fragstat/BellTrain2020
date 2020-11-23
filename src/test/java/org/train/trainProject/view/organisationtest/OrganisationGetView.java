@@ -1,4 +1,4 @@
-package org.train.trainProject.view;
+package org.train.trainProject.view.organisationtest;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
