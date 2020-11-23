@@ -26,7 +26,7 @@ public class OrganisationServiceUnitTest {
     ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    private void save() throws Exception {
+    public void save() throws Exception {
         OrganisationSavePostView organisation = new OrganisationSavePostView("Назавание", "Полное название", "1234567898", "123456789",
                 "Москва", "79684543193", true);
         ResponseEntity<SuccessView> entity = restTemplate.postForEntity("/api/organization" +
@@ -36,7 +36,7 @@ public class OrganisationServiceUnitTest {
     }
 
     @Test
-    private void get() throws Exception {
+    public void get() throws Exception {
         OrganisationGetView organisationGet = new OrganisationGetView(1L , "ТД \"Арсенал-Метиз\"", "Торговый дом \"Арсенал-Метиз\"",
                 "5008055603",
                 "500801001", "г. Долгопрудный, Лихачевский проспект, д.18, стр.1", "74995037363", true);
@@ -49,7 +49,7 @@ public class OrganisationServiceUnitTest {
     }
 
     @Test
-    private void update() throws Exception {
+    public void update() throws Exception {
         OrganisationUpdateView organisationUpdate = new OrganisationUpdateView(2L, "Новое название",
                 "Новое полное название", "12345654321", "987654321","Новая Москва",
                 "79684549331", false);
