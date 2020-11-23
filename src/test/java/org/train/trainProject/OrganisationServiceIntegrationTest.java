@@ -18,7 +18,7 @@ import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class OrganisationServiceUnitTest {
+public class OrganisationServiceIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
