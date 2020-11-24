@@ -2,12 +2,16 @@ package org.train.trainProject.view.office;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @ApiModel(description = "Офис (обновление)")
 public class OfficeUpdateView {
 
