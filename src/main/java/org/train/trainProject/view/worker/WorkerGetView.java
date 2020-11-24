@@ -2,9 +2,13 @@ package org.train.trainProject.view.worker;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Objects;
 
+@NoArgsConstructor
 @ApiModel(description = "Пользователь (get)")
 public class WorkerGetView {
 
@@ -59,5 +63,29 @@ public class WorkerGetView {
         this.citizenshipName = citizenshipName;
         this.citizenshipCode = citizenshipCode;
         this.isIdentified = isIdentified;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof WorkerGetView)) return false;
+        WorkerGetView that = (WorkerGetView) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(secondName, that.secondName) &&
+                Objects.equals(middleName, that.middleName) &&
+                Objects.equals(position, that.position) &&
+                Objects.equals(phone, that.phone) &&
+                Objects.equals(docName, that.docName) &&
+                Objects.equals(docNumber, that.docNumber) &&
+                Objects.equals(docDate, that.docDate) &&
+                Objects.equals(citizenshipName, that.citizenshipName) &&
+                Objects.equals(citizenshipCode, that.citizenshipCode) &&
+                Objects.equals(isIdentified, that.isIdentified);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, secondName, middleName, position, phone, docName, docNumber, docDate, citizenshipName, citizenshipCode, isIdentified);
     }
 }
